@@ -133,8 +133,17 @@ const Main = () => {
                 </div>
             </section>
 
-            <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800">
-                <div className="container mx-auto px-4 md:px-6">
+            <section className="flex items-center justify-center w-full py-12 md:py-24 lg:py-32 bg-gray-800">
+                <video
+                    className="h-[400px] object-cover ml-[12.5rem]" // Added object-cover for better scaling
+                    src="https://res.cloudinary.com/dlomcic7f/video/upload/v1728039763/projects/movie_zctjbx.mp4"
+                    loop // Added loop attribute
+                    muted // Added muted attribute to disable sound
+                    autoPlay // Added autoPlay to start the video automatically
+                ></video>
+                <div className="container mx-auto px-4 md:px-6 flex flex-col flex-grow">
+                    {" "}
+                    {/* Added flex-grow to occupy most space */}
                     <div className="flex flex-col items-center space-y-4 text-center">
                         <div className="space-y-2">
                             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-blue-400">
