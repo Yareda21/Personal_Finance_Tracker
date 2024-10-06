@@ -58,8 +58,8 @@ export default function AuthPage() {
     };
 
     return (
-        <main className="bg-[#111827] h-full flex justify-center items-center">
-            <Card className="w-[350px] md:w-[40%]">
+        <main className="bg-[#111827] py-24 flex justify-center items-center">
+            <Card className="w-[350px]  md:w-[40%]">
                 <CardHeader>
                     <CardTitle>Finance Tracker</CardTitle>
                     <CardDescription>
