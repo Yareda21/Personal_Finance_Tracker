@@ -39,7 +39,7 @@ const Nav = () => {
                     </span>
                 </Link>
 
-                <div className="flex flex-1 items-center justify-end md:justify-around">
+                <div className="flex flex-1 items-center justify-end gap-6">
                     <nav
                         aria-label="Global"
                         className={`${
@@ -57,23 +57,7 @@ const Nav = () => {
                             <motion.li variants={itemVariants}>
                                 <Link
                                     className="text-white font-bold transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="/About"
-                                >
-                                    Features
-                                </Link>
-                            </motion.li>
-                            <motion.li variants={itemVariants}>
-                                <Link
-                                    className="text-white font-bold transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="/About"
-                                >
-                                    Pricing
-                                </Link>
-                            </motion.li>
-                            <motion.li variants={itemVariants}>
-                                <Link
-                                    className="text-white font-bold transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="/About"
+                                    href="/about"
                                 >
                                     About
                                 </Link>
@@ -82,7 +66,7 @@ const Nav = () => {
                             <motion.li variants={itemVariants}>
                                 <Link
                                     className="text-white font-bold transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="/testimonials"
+                                    href="/contact"
                                 >
                                     Contact
                                 </Link>
@@ -94,35 +78,22 @@ const Nav = () => {
                             >
                                 <Link
                                     className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-                                    href="/"
+                                    href="/auths"
                                     onClick={closeMenu}
                                 >
                                     Login
-                                </Link>
-                                <Link
-                                    className="block my-1 rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-                                    href="/"
-                                    onClick={closeMenu}
-                                >
-                                    Sign Up
                                 </Link>
                             </motion.li>
                         </motion.ul>
                     </nav>
 
                     <div className="flex items-center gap-4">
-                        <div className="hidden md:flex sm:gap-4">
+                        <div className="flex sm:gap-4">
                             <Link
                                 className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-                                href="/login"
+                                href="/auths"
                             >
                                 Login
-                            </Link>
-                            <Link
-                                className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-                                href="/loginStudent"
-                            >
-                                Sign Up
                             </Link>
                         </div>
 
