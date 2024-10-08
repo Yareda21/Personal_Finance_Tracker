@@ -1,6 +1,7 @@
 "use client";
-
-import { useState } from "react";
+import { db, auth } from "@/firebase/firebase";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
     Bar,
     BarChart,
@@ -71,9 +72,12 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 export default function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [userData, setUserData] = useState(null);
+    const router = useRouter();
 
     const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
@@ -96,6 +100,23 @@ export default function Dashboard() {
     ];
 
     const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
+
+    // Fetch user data from Firebase
+    useEffect(() => {
+        const fetchData = async () => {
+            const db = getFirestore();
+            const userCollection = collection(db, "users"); // Adjust collection name as needed
+            const userSnapshot = await getDocs(userCollection);
+            const userList = userSnapshot.docs.map((doc) => doc.data());
+            setUserData(userList.length > 0 ? userList : null); // Set user data or null if empty
+        };
+        fetchData();
+    }, []);
+
+    const handleLogout = () => {
+        // Logic for logging out the user
+        router.push("/"); // Redirect to home page
+    };
 
     return (
         <div className="flex h-screen bg-gray-100">
@@ -165,9 +186,9 @@ export default function Dashboard() {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Profile</DropdownMenuItem>
-                            <DropdownMenuItem>Notifications</DropdownMenuItem>
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleLogout}>
+                                Logout
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </header>
@@ -247,39 +268,56 @@ export default function Dashboard() {
                                 <CardTitle>Recent Transactions</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow>
-                                            <TableHead>Date</TableHead>
-                                            <TableHead>Category</TableHead>
-                                            <TableHead>Amount</TableHead>
-                                            <TableHead>Type</TableHead>
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>2023-07-01</TableCell>
-                                            <TableCell>Groceries</TableCell>
-                                            <TableCell>$150.00</TableCell>
-                                            <TableCell>
-                                                <Badge variant="destructive">
-                                                    Expense
-                                                </Badge>
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell>2023-07-02</TableCell>
-                                            <TableCell>Salary</TableCell>
-                                            <TableCell>$3000.00</TableCell>
-                                            <TableCell>
-                                                <Badge variant="default">
-                                                    Income
-                                                </Badge>
-                                            </TableCell>
-                                        </TableRow>
-                                        {/* Add more rows as needed */}
-                                    </TableBody>
-                                </Table>
+                                {userData ? (
+                                    <Table>
+                                        <TableHeader>
+                                            <TableRow>
+                                                <TableHead>Date</TableHead>
+                                                <TableHead>Category</TableHead>
+                                                <TableHead>Amount</TableHead>
+                                                <TableHead>Type</TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            {userData.map(
+                                                (transaction, index) => (
+                                                    <TableRow key={index}>
+                                                        <TableCell>
+                                                            {transaction.date}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {
+                                                                transaction.category
+                                                            }
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {transaction.amount}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <Badge
+                                                                variant={
+                                                                    transaction.type ===
+                                                                    "expense"
+                                                                        ? "destructive"
+                                                                        : "default"
+                                                                }
+                                                            >
+                                                                {transaction.type
+                                                                    .charAt(0)
+                                                                    .toUpperCase() +
+                                                                    transaction.type.slice(
+                                                                        1
+                                                                    )}
+                                                            </Badge>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                )
+                                            )}
+                                        </TableBody>
+                                    </Table>
+                                ) : (
+                                    <p>No data available</p>
+                                )}
                             </CardContent>
                             <CardFooter>
                                 <Button>View All Transactions</Button>
