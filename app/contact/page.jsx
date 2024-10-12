@@ -21,11 +21,13 @@ export default function ContactPage() {
     };
 
     return (
-        <div className=" bg-slate-500 mx-auto w-full h-full px-8 py-8">
-            <h1 className="text-3xl font-bold mb-6 text-center">Contact Us</h1>
+        <div className=" bg-slate-800 text-black mx-auto w-full h-full px-8 py-8">
+            <h1 className="text-3xl font-bold text-white mb-6 text-center">
+                Contact Us
+            </h1>
             <div className="grid md:grid-cols-2 gap-8">
                 <Card>
-                    <CardHeader>
+                    <CardHeader className=" text-center">
                         <CardTitle>Get in Touch</CardTitle>
                         <CardDescription>
                             We're here to help with any questions about our
@@ -74,7 +76,7 @@ export default function ContactPage() {
                     </CardContent>
                 </Card>
 
-                <Card>
+                <Card className=" text-center">
                     <CardHeader>
                         <CardTitle>Contact Information</CardTitle>
                         <CardDescription>
@@ -82,22 +84,24 @@ export default function ContactPage() {
                             channels:
                         </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div className="flex items-center space-x-2">
-                            <MailIcon className="h-5 w-5 text-muted-foreground" />
-                            <span>support@personalfinancemanager.com</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <PhoneIcon className="h-5 w-5 text-muted-foreground" />
-                            <span>+1 (555) 123-4567</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <MapPinIcon className="h-5 w-5 text-muted-foreground" />
-                            <span>
-                                123 Finance Street, Money City, FC 12345
-                            </span>
-                        </div>
-                    </CardContent>
+                    <div className=" w-full h-max mt-10 flex items-center">
+                        <CardContent className="space-y-4">
+                            <div className="flex items-center space-x-2">
+                                <MailIcon className="h-5 w-5 text-muted-foreground" />
+                                <span>support@personalfinancemanager.com</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <PhoneIcon className="h-5 w-5 text-muted-foreground" />
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <MapPinIcon className="h-5 w-5 text-muted-foreground" />
+                                <span>
+                                    123 Finance Street, Money City, FC 12345
+                                </span>
+                            </div>
+                        </CardContent>
+                    </div>
                 </Card>
             </div>
         </div>

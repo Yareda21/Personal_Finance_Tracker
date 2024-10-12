@@ -1,21 +1,23 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { auth } from "@/firebase/firebase";
 import { motion } from "framer-motion";
 import { DollarSign } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Nav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const [user, setUser] = useState(null);
+    const router = useRouter();
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
     const closeMenu = () => {
         setIsMenuOpen(false);
     };
-
+    console.log(user);
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.5 } },
@@ -26,6 +28,27 @@ const Nav = () => {
         visible: { opacity: 1, y: 0 },
     };
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+            if (!currentUser) {
+                setUser(null); // Clear the auth state
+            } else {
+                setUser(currentUser);
+            }
+        });
+        return unsubscribe;
+    }, []);
+
+    const handleLogout = async () => {
+        try {
+            await auth.signOut();
+            router.push("/");
+            setUser(null);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <header className=" sticky top-0 left-0 w-full  right-0 bg-[#001d62] gray-900 z-40">
             <div className="mx-auto shadow-md flex justify-around h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-2">
@@ -33,8 +56,8 @@ const Nav = () => {
                     className="flex  text-teal-600 dark:text-teal-300"
                     href="/"
                 >
-                    <DollarSign className="h-6 w-6 text-blue-400" />
-                    <span className="hidden md:flex">
+                    <DollarSign className="h-6 w-6 text-blue-200" />
+                    <span className="hidden md:flex text-blue-200">
                         Personal Finance Manager
                     </span>
                 </Link>
@@ -76,25 +99,43 @@ const Nav = () => {
                                 variants={itemVariants}
                                 className="md:hidden"
                             >
-                                <Link
-                                    className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-                                    href="/auths"
-                                    onClick={closeMenu}
-                                >
-                                    Login
-                                </Link>
+                                {user ? (
+                                    <button
+                                        className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </button>
+                                ) : (
+                                    <Link
+                                        className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                                        href="/auths"
+                                        onClick={closeMenu}
+                                    >
+                                        Login
+                                    </Link>
+                                )}
                             </motion.li>
                         </motion.ul>
                     </nav>
 
                     <div className="flex items-center gap-4">
                         <div className="flex sm:gap-4">
-                            <Link
-                                className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-                                href="/auths"
-                            >
-                                Login
-                            </Link>
+                            {user ? (
+                                <button
+                                    className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </button>
+                            ) : (
+                                <Link
+                                    className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                                    href="/auths"
+                                >
+                                    Login
+                                </Link>
+                            )}
                         </div>
 
                         <div>
