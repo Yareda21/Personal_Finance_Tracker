@@ -1,11 +1,26 @@
+"use client";
 import { BarChart3, PieChart, TrendingUp } from "lucide-react";
 import { testimony } from "@/lib/resource";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/firebase/firebase";
+import { useRouter } from "next/navigation";
 
 const Main = () => {
+    const router = useRouter();
+    const handleGoogleSignIn = async (event) => {
+        event.preventDefault();
+        console.log("submited");
+        try {
+            await signInWithPopup(auth, googleProvider);
+            router.push("/dashboard");
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
     return (
         <main className="flex-1">
             <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -135,15 +150,13 @@ const Main = () => {
 
             <section className="flex items-center justify-center w-full py-12 md:py-24 lg:py-32 bg-gray-800">
                 <video
-                    className="h-[400px] object-cover ml-[12.5rem]" // Added object-cover for better scaling
+                    className="h-[400px] object-cover ml-[12.5rem]"
                     src="https://res.cloudinary.com/dlomcic7f/video/upload/v1728039763/projects/movie_zctjbx.mp4"
-                    loop // Added loop attribute
-                    muted // Added muted attribute to disable sound
-                    autoPlay // Added autoPlay to start the video automatically
+                    loop
+                    muted
+                    autoPlay
                 ></video>
                 <div className="container mx-auto px-4 md:px-6 flex flex-col flex-grow">
-                    {" "}
-                    {/* Added flex-grow to occupy most space */}
                     <div className="flex flex-col items-center space-y-4 text-center">
                         <div className="space-y-2">
                             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-blue-400">
@@ -164,13 +177,13 @@ const Main = () => {
                                 <Button
                                     type="submit"
                                     className="bg-blue-600 text-white hover:bg-blue-700"
+                                    onClick={handleGoogleSignIn}
                                 >
-                                    Sign Up
+                                    Sign Up with Google
                                 </Button>
                             </form>
                             <p className="text-xs text-gray-400">
-                                Start your free 30-day trial. No credit card
-                                required.
+                                Its Always Free!
                             </p>
                         </div>
                     </div>

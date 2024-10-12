@@ -27,7 +27,7 @@ const AnimatedSection = ({ children }) => {
 export default function AboutPage() {
     return (
         // <div className="min-h-screen bg-background flex flex-col">
-        <main className="flex-1 bg-[#111827]">
+        <main className="flex-1 bg-[#1b3262]">
             <AnimatedSection>
                 <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
                     <div className="container mx-auto px-4 md:px-6">
@@ -46,7 +46,7 @@ export default function AboutPage() {
                 </section>
             </AnimatedSection>
             <AnimatedSection>
-                <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-500 dark:bg-gray-800">
+                <section className="w-full py-12 md:py-24 lg:py-32 bg-blue-200 dark:bg-gray-800">
                     <div className="container mx-auto px-4 md:px-6">
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">
                             Why Choose FinanceTracker?
