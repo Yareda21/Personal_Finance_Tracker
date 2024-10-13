@@ -44,6 +44,7 @@ const AddTransaction = ({ userId }) => {
             setDescription("");
             setPaymentMethod("cash");
             setType("income");
+            window.location.reload();
         } catch (error) {
             setError(error.message); // Display error if transaction fails
         } finally {
