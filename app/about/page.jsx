@@ -110,7 +110,7 @@ export default function AboutPage() {
                                     work for you.
                                 </p>
                             </div>
-                            <Link href={"/auth"}>
+                            <Link href={"/auths"}>
                                 <Button className="inline-flex h-10 items-center justify-center rounded-md bg-blue-800 px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
                                     Get Started
                                     <ChevronRight className="ml-2 h-4 w-4" />
