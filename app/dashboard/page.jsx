@@ -222,7 +222,7 @@ const Dashboard = () => {
                                 <p>{error}</p>
                             </div>
                         ) : (
-                            <div className="mb-4 p-4 bg-green-200 text-red-700 rounded">
+                            <div className="mb-4 p-4 bg-green-200 text-black rounded">
                                 <p>{goalStatus}</p>
                             </div>
                         )}
@@ -239,9 +239,6 @@ const Dashboard = () => {
                                     <div className="text-2xl font-bold">
                                         {userData.totalBalance}
                                     </div>
-                                    <p className="text-xs text-muted-foreground">
-                                        +2% from last month
-                                    </p>
                                 </CardContent>
                             </Card>
 
@@ -256,9 +253,6 @@ const Dashboard = () => {
                                     <div className="text-2xl font-bold">
                                         {userData.monthlyIncome}
                                     </div>
-                                    <p className="text-xs text-muted-foreground">
-                                        +10% from last month
-                                    </p>
                                 </CardContent>
                             </Card>
                             <Card>
@@ -272,9 +266,6 @@ const Dashboard = () => {
                                     <div className="text-2xl font-bold">
                                         {userData.monthlyExpenses}
                                     </div>
-                                    <p className="text-xs text-muted-foreground">
-                                        -5% from last month
-                                    </p>
                                 </CardContent>
                             </Card>
                             <Card>
