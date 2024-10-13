@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/firebase/firebase";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Main = () => {
     const router = useRouter();
@@ -37,15 +38,19 @@ const Main = () => {
                             </p>
                         </div>
                         <div className="space-x-4">
-                            <Button className="bg-blue-600 text-white hover:bg-blue-700">
-                                Get Started
-                            </Button>
-                            <Button
-                                variant="outline"
-                                className="text-blue-400 border-blue-400 hover:bg-blue-400 hover:text-gray-900"
-                            >
-                                Learn More
-                            </Button>
+                            <Link href="/auths">
+                                <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                                    Get Started
+                                </Button>
+                            </Link>
+                            <Link href="/about">
+                                <Button
+                                    variant="outline"
+                                    className="text-blue-400 border-blue-400 hover:bg-blue-400 hover:text-gray-900"
+                                >
+                                    Learn More
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
